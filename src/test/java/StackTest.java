@@ -14,19 +14,47 @@ public class StackTest {
     }
 
     @Test
-    public void isEmpty() throws Exception {
+    public void isEmptyReturnsTrue() throws Exception {
     }
 
     @Test
-    public void top() throws Exception {
+    public void isEmptyReturnsFalseWhenHasElements() throws Exception {
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void topThrowsExceptionWhenEmpty() throws Exception {
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void popThrowsExceptionWhenEmpty() throws Exception {
     }
 
     @Test
-    public void push() throws Exception {
+    public void topReturnsValidTopString() throws Exception {
     }
 
     @Test
-    public void pop() throws Exception {
+    public void topReturnsReferenceToPushedInstance() throws Exception {
+    }
+
+    @Test
+    public void pushAddsElements() throws Exception {
+    }
+
+    @Test
+    public void pushAcceptsNull() throws Exception {
+    }
+
+    @Test
+    public void popRemovesTheTopElement() throws Exception {
+    }
+
+    @Test
+    public void popThrowsExceptionWhenAllElementsAreRemoved() throws Exception {
+    }
+
+    @Test
+    public void popRemainsInValidStateAfterThrowingException() throws Exception {
     }
 
 }
