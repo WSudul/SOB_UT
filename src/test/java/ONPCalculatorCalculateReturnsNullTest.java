@@ -8,29 +8,22 @@ import org.junit.runners.Parameterized.Parameters;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(Parameterized.class)
-public class ONPCalculatorCalculateTest {
+public class ONPCalculatorCalculateReturnsNullTest {
 
-    private final double kEpsilon = 0.01;
     private ONPCalculator onpCalculator;
     private String input;
-    private Double expectedOutput;
 
-    public ONPCalculatorCalculateTest(String input, Double expectedOutput) {
+    public ONPCalculatorCalculateReturnsNullTest(String input) {
         this.input = input;
-        this.expectedOutput = expectedOutput;
     }
 
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {"2 3 +", 5d}, {"2 3 -", -1d}, {"2 3 + 4 -", 1d},
-                {"2 3 *", 6d}, {"2 3 /", 0.66d}, {"2 3 ^", 8d}, {"2 3 V", 1.2599d},
-                {"2 3 * 4  /", 1.5}, {"2 3 4 * + ", 16d}, {"2 3 4 ^ *", 162d},
-                {"2 3 4 V *", 2.632d}, {"2 3 4 V ^", 2.489}, {"2 3 + 4 *", 20d},
-                {"2 3 ^ 4 V", 1.681d}
+                {"2 3 4 +"}, {""}, {null}, {"2+2="}, {"(2+2"}, {"foobar"}
         });
     }
 
@@ -46,8 +39,8 @@ public class ONPCalculatorCalculateTest {
     @Test
     public void calculateONPEquation() throws Exception {
         System.out.println("input: " + input);
-        System.out.println("expectedOutput: " + expectedOutput);
-        assertEquals(expectedOutput, onpCalculator.calculateONPEquation(input), kEpsilon);
+
+        assertNull(onpCalculator.calculateONPEquation(input));
     }
 
 }
