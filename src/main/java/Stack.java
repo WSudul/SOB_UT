@@ -1,26 +1,41 @@
 import java.util.LinkedList;
-import java.util.List;
 
 public class Stack {
 
-    //TODO
-    List list = new LinkedList();
-
+    LinkedList<String> list = new LinkedList<>();
 
     public boolean isEmpty() {
         return list.isEmpty();
     }
 
     public String top() throws IllegalStateException {
-        //dziala jak peek()
-        return null;
+        if (list.isEmpty())
+            throw new IllegalStateException("Cannot peek the top element. Stack is empty!");
+        else
+            return list.getFirst();
     }
 
     public String push(String e) {
-        return null;
+        list.addFirst(e);
+        return list.getFirst();
+
     }
 
     public String pop() throws IllegalStateException {
-        return null;
+        if (list.isEmpty())
+            throw new IllegalStateException("Cannot remove element. Stack is empty!");
+        else
+            return list.removeFirst();
+    }
+
+    public long size() {
+        return list.size();
+    }
+
+    @Override
+    public String toString() {
+        String sb = "Stack{" + list +
+                '}';
+        return sb;
     }
 }
