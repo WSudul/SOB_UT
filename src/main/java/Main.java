@@ -9,11 +9,5 @@ public class Main {
         System.out.println(testStack.pop());
         System.out.println(testStack.isEmpty());
 
-
-        ONPCalculator onpCalculator = new ONPCalculator("2+2=");
-        //onpCalculator.foo();
-        //onpCalculator.bar();
-
-
     }
 }

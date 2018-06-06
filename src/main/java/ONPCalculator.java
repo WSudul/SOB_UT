@@ -1,19 +1,8 @@
 public class ONPCalculator {
-    //TODO implement parseEquation and calculateONPEquation by moving foo() and bar() methods
-    private Stack stack = new Stack();
 
-    private String equation = "";
     private String ONP = new String();
 
-
-    @Deprecated
-    public ONPCalculator(String equation) {
-        System.out.println("Ctor ONP: " + equation);
-        this.equation = equation;
-    }
-
     public ONPCalculator() {
-        this("");
     }
 
     public String parseEquation(String equation) {
@@ -131,41 +120,40 @@ public class ONPCalculator {
         if (null == equationONP || equationONP.isEmpty())
             return null;
 
-        //todo
-        String[] wartosci = equationONP.split(" ");
-        Stack ZNAKw = new Stack();
-        for (String element : wartosci) {
+        String[] elements = equationONP.split(" ");
+        Stack stack = new Stack();
+        for (String element : elements) {
             if (!element.equals("-") && !element.equals("+") && !element.equals("/") && !element.equals("*")
                     && !element.equals("^") && !element.equals("%") && !element.equals("V")) {
-                ZNAKw.push(element);
-            } else if (ZNAKw.size() >= 2) {
-                Double y = Double.parseDouble(ZNAKw.top());
-                ZNAKw.pop();
-                Double x = Double.parseDouble(ZNAKw.top());
-                ZNAKw.pop();
+                stack.push(element);
+            } else if (stack.size() >= 2) {
+                Double y = Double.parseDouble(stack.top());
+                stack.pop();
+                Double x = Double.parseDouble(stack.top());
+                stack.pop();
 
                 switch (element) {
                     case "+":
-                        ZNAKw.push((x + y) + "");
+                        stack.push((x + y) + "");
                         break;
                     case "-":
-                        ZNAKw.push((x - y) + "");
+                        stack.push((x - y) + "");
                         break;
                     case "*":
-                        ZNAKw.push((x * y) + "");
+                        stack.push((x * y) + "");
                         break;
                     case "/":
                         if (x != 0)
-                            ZNAKw.push((x / y) + "");
+                            stack.push((x / y) + "");
                         break;
                     case "^":
-                        ZNAKw.push((Math.pow(x, y)) + "");
+                        stack.push((Math.pow(x, y)) + "");
                         break;
                     case "%":
-                        ZNAKw.push((x % y) + "");
+                        stack.push((x % y) + "");
                         break;
                     case "V":
-                        ZNAKw.push((Math.pow(x, (1 / y))) + "");
+                        stack.push((Math.pow(x, (1 / y))) + "");
                         break;
                     default:
                         break;
@@ -174,10 +162,9 @@ public class ONPCalculator {
             } else
                 System.out.println("Error: ");
         }
-        //System.out.println(ZNAKw.top());
 
-        if(isNumeric(ZNAKw.top()) && ZNAKw.size() == 1){
-            return Double.parseDouble(ZNAKw.top());
+        if(isNumeric(stack.top()) && stack.size() == 1){
+            return Double.parseDouble(stack.top());
         } else {
             return null;
         }
