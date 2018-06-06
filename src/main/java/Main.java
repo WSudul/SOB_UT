@@ -11,8 +11,8 @@ public class Main {
 
 
         ONPCalculator onpCalculator = new ONPCalculator("2+2=");
-        onpCalculator.foo();
-        onpCalculator.bar();
+        //onpCalculator.foo();
+        //onpCalculator.bar();
 
 
     }

@@ -18,26 +18,10 @@ public class ONPCalculator {
 
     public String parseEquation(String equation) {
         if (null == equation || equation.isEmpty())
-            return "";
+            return null;
         //todo
-        String equationONP = "";
-        return equationONP;
-
-    }
-
-    public Double calculateONPEquation(String equationONP) {
-        if (null == equationONP || equationONP.isEmpty())
-            return 0.0d;
-
-        //todo
-        return 0.0d;
-    }
-
-    @Deprecated
-    public void foo() {
-
         Stack ZNAK = new Stack();
-
+        int bracket = 0;
         //System.out.print(args[j]+ " ");
         ONP = "";
         if (equation.endsWith("=")) {
@@ -107,11 +91,13 @@ public class ONPCalculator {
 
                     case '(':
                         ZNAK.push(equation.charAt(c) + "");
+                        bracket++;
                         break;
                     case ')':
                         while (!ZNAK.isEmpty() && !ZNAK.top().equals("(")) {
                             ONP += ZNAK.top() + " ";
                             ZNAK.pop();
+                            bracket--;
                         }
                         ZNAK.pop();
                         break;
@@ -131,16 +117,22 @@ public class ONPCalculator {
 
         } else {
             System.out.print("Wprowadzone rownanie jest nieprawidlowe! Brakuje znaku ");
+            return null;
         }
-        System.out.print(ONP);
-        System.out.print("= \n");
-        System.out.println("ZNAK=" + ZNAK.toString());
+        if(bracket!=0){
+            return null;
+        }
+        String equationONP = ONP+"=";
+        return equationONP;
+
     }
 
-    @Deprecated
-    public void bar() {
-        // Wyliczenie wartości:
-        String[] wartosci = ONP.split(" ");
+    public Double calculateONPEquation(String equationONP) {
+        if (null == equationONP || equationONP.isEmpty())
+            return null;
+
+        //todo
+        String[] wartosci = equationONP.split(" ");
         Stack ZNAKw = new Stack();
         for (String element : wartosci) {
             if (!element.equals("-") && !element.equals("+") && !element.equals("/") && !element.equals("*")
@@ -182,8 +174,20 @@ public class ONPCalculator {
             } else
                 System.out.println("Error: ");
         }
-        System.out.println(ZNAKw.top());
+        //System.out.println(ZNAKw.top());
+
+        if(isNumeric(ZNAKw.top()) && ZNAKw.size() == 1){
+            return Double.parseDouble(ZNAKw.top());
+        } else {
+            return null;
+        }
+
 
     }
+    public boolean isNumeric(String str)
+    {
+        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+    }
+
 }
 
